@@ -22,9 +22,7 @@ const NodeFontSizePicker: React.FC<NodeFontSizePickerProps> = ({
       fontSize: 14,
     };
 
-    // Only dispatch if the font size is different from the previous one
     if (prevStyle.fontSize !== fontSize) {
-      // Save previous style in history
       dispatch(
         addToHistory({
           type: "STYLE_CHANGE",
