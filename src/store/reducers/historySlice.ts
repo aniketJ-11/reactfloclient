@@ -17,21 +17,10 @@ const historySlice = createSlice({
   initialState,
   reducers: {
     addToHistory: (state, action: PayloadAction<any>) => {
-      if (state.present !== null) {
-        state.past.push(state.present);
-      }
+      state.past.push(state.present);
       state.present = action.payload;
       state.future = [];
     },
-
-    // addToHistory: (state, action: PayloadAction<any>) => {
-    //   if (state.present !== null) {
-    //     state.past.push(state.present);
-    //   }
-    //   state.present = action.payload;
-    //   state.future = [];
-    // },
-
     undo: (state) => {
       if (state.past.length > 0) {
         const previous = state.past.pop();

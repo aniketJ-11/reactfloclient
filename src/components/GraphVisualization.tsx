@@ -9,9 +9,12 @@ import ReactFlow, {
   type Node,
 } from "reactflow";
 import { useSelector, useDispatch } from "react-redux";
-import type { RootState } from "../store";
-import { setSelectedNode, updateNodePosition } from "../store/graphSlice";
-import { addToHistory } from "../store/historySlice";
+import type { RootState } from "../store/store";
+import {
+  setSelectedNode,
+  updateNodePosition,
+} from "../store/reducers/graphSlice";
+import { addToHistory } from "../store/reducers/historySlice";
 import CustomNode from "./CustomNode";
 import ControlPanel from "./ControlPanel";
 import "reactflow/dist/style.css";

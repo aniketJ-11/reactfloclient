@@ -1,7 +1,7 @@
-import type React from "react"
-import { Provider } from "react-redux"
-import { store } from "./store"
-import GraphVisualization from "./components/GraphVisualization"
+import type React from "react";
+import { Provider } from "react-redux";
+import { store } from "./store/store";
+import GraphVisualization from "./components/GraphVisualization";
 
 const App: React.FC = () => {
   return (
@@ -11,8 +11,7 @@ const App: React.FC = () => {
         <GraphVisualization />
       </div>
     </Provider>
-  )
-}
+  );
+};
 
-export default App
-
+export default App;
