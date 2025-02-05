@@ -12,7 +12,7 @@ const initialNodes: Node[] = Array.from({ length: 10 }, (_, i) => ({
   type: "custom",
   data: {
     label: `Node ${i}`,
-    style: { color: "#000000", fontSize: 14 },
+    style: { color: "#DDEB9D", fontSize: 14 },
   },
   position: { x: Math.random() * 500, y: Math.random() * 500 },
 }));
@@ -24,6 +24,7 @@ for (let i = 0; i < initialNodes.length; i++) {
       id: `e${i}-${j}`,
       source: `${i}`,
       target: `${j}`,
+      animated: true,
     });
   }
 }

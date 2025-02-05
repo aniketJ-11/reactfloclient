@@ -1,17 +1,17 @@
-import type React from "react"
-import { memo } from "react"
-import { Handle, Position, type NodeProps } from "reactflow"
+import type React from "react";
+import { memo } from "react";
+import { Handle, Position, type NodeProps } from "reactflow";
 
 interface CustomNodeData {
-  label: string
+  label: string;
   style?: {
-    color: string
-    fontSize: number
-  }
+    color: string;
+    fontSize: number;
+  };
 }
 
 const CustomNode: React.FC<NodeProps<CustomNodeData>> = ({ data }) => {
-  const style = data.style || { color: "#000000", fontSize: 14 }
+  const style = data.style || { color: "#DDEB9D", fontSize: 14 };
 
   return (
     <div
@@ -19,7 +19,7 @@ const CustomNode: React.FC<NodeProps<CustomNodeData>> = ({ data }) => {
         background: style.color,
         padding: "10px",
         borderRadius: "5px",
-        color: "#ffffff",
+        color: "#000000",
         fontSize: `${style.fontSize}px`,
       }}
     >
@@ -27,8 +27,7 @@ const CustomNode: React.FC<NodeProps<CustomNodeData>> = ({ data }) => {
       <div>{data.label}</div>
       <Handle type="source" position={Position.Bottom} />
     </div>
-  )
-}
+  );
+};
 
-export default memo(CustomNode)
-
+export default memo(CustomNode);
