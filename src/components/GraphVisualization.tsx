@@ -41,16 +41,17 @@ const GraphVisualization: React.FC = () => {
 
   const initialPositions = useRef<Record<string, { x: number; y: number }>>({});
   useEffect(() => {
-    setNodes(
-      storeNodes.map((node) => ({
-        ...node,
-        data: {
-          ...node.data,
-          style: nodeStyles[node.id] || { color: "#DDEB9D", fontSize: 14 },
-        },
-      }))
+    setNodes((prevNodes) =>
+      prevNodes.map((node) =>
+        nodeStyles[node.id]
+          ? {
+              ...node,
+              data: { ...node.data, style: nodeStyles[node.id] },
+            }
+          : node
+      )
     );
-  }, [storeNodes, nodeStyles, setNodes]);
+  }, [nodeStyles, setNodes]);
 
   useEffect(() => {
     if (historyPresent) {
@@ -118,7 +119,6 @@ const GraphVisualization: React.FC = () => {
         edges={edges}
         onNodesChange={onNodesChange}
         onNodeDragStart={onNodeDragStart}
-        // onNodeClick={onNodeClick}
         onEdgesChange={onEdgesChange}
         nodeTypes={nodeTypes}
         onNodeDragStop={onNodeDragStop}

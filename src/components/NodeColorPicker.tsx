@@ -22,18 +22,23 @@ const NodeColorPicker: React.FC<NodeColorPickerProps> = ({ selectedNode }) => {
   }, [selectedNode, nodeStyles]);
 
   const handleColorChange = (newColor: string) => {
-    setColor(newColor);
     if (!selectedNode) return;
 
-    const newStyle = { ...nodeStyles[selectedNode], color: newColor };
-    dispatch(updateNodeColor({ id: selectedNode, color: newColor }));
+    const prevStyle = nodeStyles[selectedNode] || {
+      color: "#DDEB9D",
+      fontSize: 14,
+    };
+    const newStyle = { ...prevStyle, color: newColor };
+
     dispatch(
       addToHistory({
         type: "STYLE_CHANGE",
         id: selectedNode,
-        style: newStyle,
+        style: prevStyle,
       })
     );
+
+    dispatch(updateNodeColor({ id: selectedNode, color: newColor }));
   };
 
   return (

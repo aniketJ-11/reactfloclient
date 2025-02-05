@@ -18,15 +18,21 @@ const NodeFontSizePicker: React.FC<NodeFontSizePickerProps> = ({
   const handleFontSizeChange = (fontSize: number) => {
     if (!selectedNode) return;
 
-    const newStyle = { ...nodeStyles[selectedNode], fontSize };
-    dispatch(updateNodeFontSize({ id: selectedNode, fontSize }));
+    const prevStyle = nodeStyles[selectedNode] || {
+      color: "#DDEB9D",
+      fontSize: 14,
+    };
+    const newStyle = { ...prevStyle, fontSize };
+
     dispatch(
       addToHistory({
         type: "STYLE_CHANGE",
         id: selectedNode,
-        style: newStyle,
+        style: { ...prevStyle },
       })
     );
+
+    dispatch(updateNodeFontSize({ id: selectedNode, fontSize }));
   };
 
   return (
