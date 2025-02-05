@@ -32,7 +32,7 @@ const historySlice = createSlice({
     },
     redo: (state) => {
       if (state.future.length > 0) {
-        const next = state.future.shift();
+        const next = state.future.pop();
 
         if (state.present !== null) {
           state.past.push({ ...state.present });
