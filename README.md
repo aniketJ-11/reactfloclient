@@ -1,50 +1,104 @@
-# React + TypeScript + Vite
+# React Flow Graph Visualization
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a graph visualization application built using **React Flow** for interactive, draggable nodes with connected edges. The project leverages **Redux Toolkit** for efficient state management and **TypeScript** for type safety. The app is set up using **Vite** for a fast development experience.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Graph Visualization
 
-## Expanding the ESLint configuration
+- **Initialize Graph**: The graph starts with 10 interconnected, draggable nodes.
+- **Smooth Animations**: All graph interactions, including node dragging and edge connections, are smoothly animated.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Node Customization
 
-- Configure the top-level `parserOptions` property like this:
+- **Color Modification**:
+  - Select any node to change its color using a color picker.
+  - Changes are reflected immediately.
+  - Color history is tracked for undo/redo functionality.
+- **Font Size Adjustment**:
+  - Adjust node text size between 12px to 24px.
+  - All font size changes are tracked for undo/redo.
+  - Ensures readability at all sizes.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+### Undo/Redo Functionality
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+- **Undo Button**: Reverts the last action (color change, font size change, or node position adjustment).
+- **Redo Button**: Restores reverted actions.
+- **Action Tracking**: Maintains a history stack of all modifications.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## Technical Stack
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+- **React.js**
+- **Redux Toolkit** (for state management)
+- **React Flow** (for graph visualization)
+- **TypeScript** (for type safety)
+- **Vite** (for project setup and development)
+
+## Setup Instructions
+
+### Prerequisites
+
+- Node.js (v14 or higher recommended)
+- npm or yarn package manager
+
+### Getting Started
+
+1. **Clone the Repository**
+
+   ```bash
+   git clone <repo-url>
+   cd <repo-folder>
+   ```
+
+2. **Install Dependencies**
+   Using npm:
+
+   ```bash
+   npm install
+   ```
+
+   Using yarn:
+
+   ```bash
+   yarn install
+   ```
+
+3. **Run the Application Locally**
+   Using npm:
+
+   ```bash
+   npm run dev
+   ```
+
+   Using yarn:
+
+   ```bash
+   yarn dev
+   ```
+
+4. **Open in Browser**
+   Visit `http://localhost:5173` in your web browser to see the app in action.
+
+## Available Scripts
+
+- `npm run dev` / `yarn dev`: Start the development server.
+- `npm run build` / `yarn build`: Build the project for production.
+- `npm run preview` / `yarn preview`: Preview the production build locally.
+
+## Dependencies
+
+- **react**
+- **react-dom**
+- **react-flow-renderer**
+- **@reduxjs/toolkit**
+- **react-redux**
+- **typescript**
+- **vite**
+
+## Third-Party Libraries Used
+
+- `reactflow`: For graph visualization.
+- `@reduxjs/toolkit`: For state management.
+- `react-redux`: For integrating Redux with React.
+- `typescript`: For type safety.
+- `vite`: For fast development and build process.
