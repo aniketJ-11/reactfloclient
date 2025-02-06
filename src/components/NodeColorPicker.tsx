@@ -3,21 +3,20 @@ import { addToHistory } from "../store/reducers/historySlice";
 import { updateNodeColor } from "../store/reducers/stylingSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/store";
-
-interface NodeColorPickerProps {
-  selectedNode: string | null;
-}
+import { NodeColorPickerProps } from "../types/type";
+import { nodeBgColor, nodeFontSize } from "../utils/nodeDefaultColor";
 
 const NodeColorPicker: React.FC<NodeColorPickerProps> = ({ selectedNode }) => {
+  const [color, setColor] = useState<string>(nodeBgColor);
+
   const dispatch = useDispatch();
   const nodeStyles = useSelector(
-    (state: RootState) => state.styling.nodeStyles
+    (state: RootState) => state?.styling?.nodeStyles
   );
-  const [color, setColor] = useState<string>("#DDEB9D");
 
   useEffect(() => {
     if (selectedNode) {
-      setColor(nodeStyles[selectedNode]?.color || "#DDEB9D");
+      setColor(nodeStyles[selectedNode]?.color || nodeBgColor);
     }
   }, [selectedNode, nodeStyles]);
 
@@ -25,8 +24,8 @@ const NodeColorPicker: React.FC<NodeColorPickerProps> = ({ selectedNode }) => {
     if (!selectedNode) return;
 
     const prevStyle = nodeStyles[selectedNode] || {
-      color: "#DDEB9D",
-      fontSize: 14,
+      color: nodeBgColor,
+      fontSize: nodeFontSize,
     };
 
     if (prevStyle.color !== newColor) {
@@ -55,7 +54,7 @@ const NodeColorPicker: React.FC<NodeColorPickerProps> = ({ selectedNode }) => {
     <input
       type="color"
       value={color}
-      onChange={(e) => handleColorChange(e.target.value)}
+      onChange={(e) => handleColorChange(e?.target?.value)}
     />
   );
 };

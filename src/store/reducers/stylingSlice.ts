@@ -1,13 +1,6 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-
-interface NodeStyle {
-  color: string;
-  fontSize: number;
-}
-
-interface StylingState {
-  nodeStyles: Record<string, NodeStyle>;
-}
+import { StylingState } from "../../types/type";
+import { nodeBgColor, nodeFontSize } from "../../utils/nodeDefaultColor";
 
 const initialState: StylingState = {
   nodeStyles: {},
@@ -21,9 +14,9 @@ const stylingSlice = createSlice({
       state,
       action: PayloadAction<{ id: string; color: string }>
     ) => {
-      const { id, color } = action.payload;
-      if (!state.nodeStyles[id]) {
-        state.nodeStyles[id] = { color, fontSize: 14 };
+      const { id, color } = action?.payload;
+      if (!state?.nodeStyles[id]) {
+        state.nodeStyles[id] = { color, fontSize: nodeFontSize };
       } else {
         state.nodeStyles[id].color = color;
       }
@@ -32,10 +25,10 @@ const stylingSlice = createSlice({
       state,
       action: PayloadAction<{ id: string; fontSize: number }>
     ) => {
-      const { id, fontSize } = action.payload;
+      const { id, fontSize } = action?.payload;
 
       if (!state.nodeStyles[id]) {
-        state.nodeStyles[id] = { color: "#DDEB9D", fontSize };
+        state.nodeStyles[id] = { color: nodeBgColor, fontSize };
       } else {
         state.nodeStyles[id].fontSize = fontSize;
       }

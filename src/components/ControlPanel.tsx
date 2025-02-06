@@ -6,17 +6,18 @@ import NodeColorPicker from "./NodeColorPicker";
 import NodeFontSizePicker from "./NodeFontSizePicker";
 
 const ControlPanel: React.FC = () => {
-  const dispatch = useDispatch();
   const [selectedNode, setSelectedNode] = useState<string | null>(null);
-  const nodes = useSelector((state: RootState) => state.graph.nodes);
+
+  const dispatch = useDispatch();
+  const nodes = useSelector((state: RootState) => state?.graph?.nodes);
 
   return (
     <div>
-      <select onChange={(e) => setSelectedNode(e.target.value)}>
+      <select onChange={(e) => setSelectedNode(e?.target?.value)}>
         <option value="">Select a node</option>
         {nodes.map((node) => (
-          <option key={node.id} value={node.id}>
-            {node.data.label}
+          <option key={node?.id} value={node?.id}>
+            {node?.data?.label}
           </option>
         ))}
       </select>

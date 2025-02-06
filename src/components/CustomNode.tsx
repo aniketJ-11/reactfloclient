@@ -1,17 +1,11 @@
 import type React from "react";
 import { memo } from "react";
 import { Handle, Position, type NodeProps } from "reactflow";
-
-interface CustomNodeData {
-  label: string;
-  style?: {
-    color: string;
-    fontSize: number;
-  };
-}
+import { CustomNodeData } from "../types/type";
+import { nodeBgColor, nodeFontSize } from "../utils/nodeDefaultColor";
 
 const CustomNode: React.FC<NodeProps<CustomNodeData>> = ({ data }) => {
-  const style = data.style || { color: "#DDEB9D", fontSize: 14 };
+  const style = data?.style || { color: nodeBgColor, fontSize: nodeFontSize };
 
   return (
     <div
@@ -23,9 +17,9 @@ const CustomNode: React.FC<NodeProps<CustomNodeData>> = ({ data }) => {
         fontSize: `${style.fontSize}px`,
       }}
     >
-      <Handle type="target" position={Position.Top} />
-      <div>{data.label}</div>
-      <Handle type="source" position={Position.Bottom} />
+      <Handle type="target" position={Position?.Top} />
+      <div>{data?.label}</div>
+      <Handle type="source" position={Position?.Bottom} />
     </div>
   );
 };

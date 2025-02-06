@@ -1,10 +1,5 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-
-interface HistoryState {
-  past: any[];
-  present: any | null;
-  future: any[];
-}
+import { HistoryState } from "../../types/type";
 
 const initialState: HistoryState = {
   past: [],
@@ -17,27 +12,27 @@ const historySlice = createSlice({
   initialState,
   reducers: {
     addToHistory: (state, action: PayloadAction<any>) => {
-      if (JSON.stringify(state.present) !== JSON.stringify(action.payload)) {
-        state.past.push(state.present);
-        state.present = action.payload;
+      if (JSON.stringify(state?.present) !== JSON.stringify(action?.payload)) {
+        state?.past?.push(state?.present);
+        state.present = action?.payload;
         state.future = [];
       }
     },
     undo: (state) => {
-      if (state.past.length > 0) {
-        const previous = state.past.pop();
+      if (state?.past?.length > 0) {
+        const previous = state?.past?.pop();
         if (state.present !== null) {
-          state.future.push(state.present);
+          state?.future?.push(state?.present);
         }
         state.present = { ...previous };
       }
     },
     redo: (state) => {
-      if (state.future.length > 0) {
-        const next = state.future.pop();
+      if (state?.future?.length > 0) {
+        const next = state?.future?.pop();
 
-        if (state.present !== null) {
-          state.past.push({ ...state.present });
+        if (state?.present !== null) {
+          state?.past?.push({ ...state?.present });
         }
 
         state.present = { ...next };

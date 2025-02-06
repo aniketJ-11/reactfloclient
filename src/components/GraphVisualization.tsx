@@ -10,10 +10,7 @@ import ReactFlow, {
 } from "reactflow";
 import { useSelector, useDispatch } from "react-redux";
 import type { RootState } from "../store/store";
-import {
-  setSelectedNode,
-  updateNodePosition,
-} from "../store/reducers/graphSlice";
+import { updateNodePosition } from "../store/reducers/graphSlice";
 import { addToHistory } from "../store/reducers/historySlice";
 import CustomNode from "./CustomNode";
 import ControlPanel from "./ControlPanel";
@@ -30,24 +27,24 @@ const GraphVisualization: React.FC = () => {
     (state: RootState) => state.graph
   );
   const nodeStyles = useSelector(
-    (state: RootState) => state.styling.nodeStyles
+    (state: RootState) => state?.styling?.nodeStyles
   );
   const historyPresent = useSelector(
-    (state: RootState) => state.history.present
+    (state: RootState) => state?.history?.present
   );
 
   const [nodes, setNodes, onNodesChange] = useNodesState(storeNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(storeEdges);
+  const [edges, _, onEdgesChange] = useEdgesState(storeEdges);
 
   const initialPositions = useRef<Record<string, { x: number; y: number }>>({});
 
   useEffect(() => {
     setNodes((prevNodes) =>
       prevNodes.map((node) =>
-        nodeStyles[node.id]
+        nodeStyles[node?.id]
           ? {
               ...node,
-              data: { ...node.data, style: nodeStyles[node.id] },
+              data: { ...node?.data, style: nodeStyles[node?.id] },
             }
           : node
       )
@@ -78,13 +75,14 @@ const GraphVisualization: React.FC = () => {
   }, [historyPresent, nodes]);
 
   const onNodeDragStart = useCallback(
-    (event: React.MouseEvent, node: Node) => {
-      initialPositions.current[node.id] = { ...node.position };
+    (_: React.MouseEvent, node: Node) => {
+      initialPositions.current[node?.id] = { ...node?.position };
+
       dispatch(
         addToHistory({
           type: "NODE_MOVE",
-          id: node.id,
-          position: node.position,
+          id: node?.id,
+          position: node?.position,
         })
       );
     },
@@ -92,19 +90,20 @@ const GraphVisualization: React.FC = () => {
   );
 
   const onNodeDragStop = useCallback(
-    (event: React.MouseEvent, node: Node) => {
-      const prevPosition = initialPositions.current[node.id];
-      const newPosition = node.position;
+    (_: React.MouseEvent, node: Node) => {
+      const prevPosition = initialPositions?.current[node?.id];
+      const newPosition = node?.position;
 
       if (
         prevPosition &&
-        (prevPosition.x !== newPosition.x || prevPosition.y !== newPosition.y)
+        (prevPosition?.x !== newPosition?.x ||
+          prevPosition?.y !== newPosition?.y)
       ) {
-        dispatch(updateNodePosition({ id: node.id, position: newPosition }));
+        dispatch(updateNodePosition({ id: node?.id, position: newPosition }));
         dispatch(
           addToHistory({
             type: "NODE_MOVE",
-            id: node.id,
+            id: node?.id,
             position: newPosition,
           })
         );
