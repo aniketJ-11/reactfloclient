@@ -14,14 +14,18 @@ const NodeFontSizePicker: React.FC<NodeFontSizePickerProps> = ({
   const nodeStyles = useSelector(
     (state: RootState) => state?.styling?.nodeStyles
   );
+
   const handleFontSizeChange = (fontSize: number) => {
     if (!selectedNode) return;
 
+    // It retrieve the previous fontSizee of the selected node.
+    // If no style exists yet, use default background color and font size.
     const prevStyle = nodeStyles[selectedNode] || {
       color: nodeBgColor,
       fontSize: nodeFontSize,
     };
 
+    // Check if the new font size is different from the current font size
     if (prevStyle.fontSize !== fontSize) {
       dispatch(
         addToHistory({
@@ -31,6 +35,7 @@ const NodeFontSizePicker: React.FC<NodeFontSizePickerProps> = ({
         })
       );
 
+      // Create a new style object with the updated font size
       const newStyle = { ...prevStyle, fontSize };
 
       dispatch(

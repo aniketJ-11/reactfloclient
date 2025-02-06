@@ -39,29 +39,38 @@ const GraphVisualization: React.FC = () => {
   const initialPositions = useRef<Record<string, { x: number; y: number }>>({});
 
   useEffect(() => {
+    //This effect updates the nodestyles whenever `nodeStyles` in the Redux store changes.
+    // It ensures that any style updates (like color or fontsize changes) are immediately reflected in the UI.
+
     setNodes((prevNodes) =>
-      prevNodes.map((node) =>
-        nodeStyles[node?.id]
-          ? {
-              ...node,
-              data: { ...node?.data, style: nodeStyles[node?.id] },
-            }
-          : node
+      prevNodes.map(
+        (node) =>
+          nodeStyles[node?.id] // Check if there are styles for this specific node
+            ? {
+                ...node, // Keep the existing node properties
+                data: { ...node?.data, style: nodeStyles[node?.id] }, // Apply new styles to the node's data
+              }
+            : node // If no new styles are found, return the node unchanged
       )
     );
   }, [nodeStyles, setNodes]);
 
   useEffect(() => {
+    // This effect listens for changes in the `historyPresent` redux state.
+    // It handles undo/redo actions for node position changes and styles changes.
+
     if (historyPresent) {
+      // If the last action was moving a node, update its position in the UI.
       if (historyPresent.type === "NODE_MOVE") {
         setNodes((nodes) =>
           nodes.map((node) =>
-            node.id === historyPresent.id
-              ? { ...node, position: historyPresent.position }
+            node.id === historyPresent.id // Check if this is the node that was moved
+              ? { ...node, position: historyPresent.position } // It update the node's position
               : node
           )
         );
       }
+      // If the last action was Style change like color change or fontSize change, update its style in the UI.
       if (historyPresent.type === "STYLE_CHANGE") {
         setNodes((nodes) =>
           nodes.map((node) =>

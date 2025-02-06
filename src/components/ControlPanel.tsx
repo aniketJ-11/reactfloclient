@@ -1,14 +1,13 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
+import UndoRedoControls from "./UndoRedoControls";
 import type { RootState } from "../store/store";
-import { undo, redo } from "../store/reducers/historySlice";
 import NodeColorPicker from "./NodeColorPicker";
 import NodeFontSizePicker from "./NodeFontSizePicker";
 
 const ControlPanel: React.FC = () => {
   const [selectedNode, setSelectedNode] = useState<string | null>(null);
 
-  const dispatch = useDispatch();
   const nodes = useSelector((state: RootState) => state?.graph?.nodes);
 
   return (
@@ -29,8 +28,7 @@ const ControlPanel: React.FC = () => {
         </>
       )}
 
-      <button onClick={() => dispatch(undo())}>Undo</button>
-      <button onClick={() => dispatch(redo())}>Redo</button>
+      <UndoRedoControls />
     </div>
   );
 };

@@ -23,12 +23,16 @@ const NodeColorPicker: React.FC<NodeColorPickerProps> = ({ selectedNode }) => {
   const handleColorChange = (newColor: string) => {
     if (!selectedNode) return;
 
+    // It basically retrieve the previous style of the selected node.
+    // If no style exists yet, use default values for color and font size.
     const prevStyle = nodeStyles[selectedNode] || {
-      color: nodeBgColor,
-      fontSize: nodeFontSize,
+      color: nodeBgColor, //defauil value
+      fontSize: nodeFontSize, //defauil value
     };
 
+    // Checking if the new color is different from the previous one
     if (prevStyle.color !== newColor) {
+      // Add the previous style to the history for undo
       dispatch(
         addToHistory({
           type: "STYLE_CHANGE",
@@ -36,8 +40,9 @@ const NodeColorPicker: React.FC<NodeColorPickerProps> = ({ selectedNode }) => {
           style: { ...prevStyle },
         })
       );
-
+      // Created a new style object with the updated color
       const newStyle = { ...prevStyle, color: newColor };
+      // Add the new style to the history reducer for redo functionality
       dispatch(
         addToHistory({
           type: "STYLE_CHANGE",
