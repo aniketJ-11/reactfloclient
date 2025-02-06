@@ -35,7 +35,7 @@ const stylingSlice = createSlice({
       const { id, fontSize } = action.payload;
 
       if (!state.nodeStyles[id]) {
-        state.nodeStyles[id] = { color: "#DDEB9D", fontSize }; // Set default color
+        state.nodeStyles[id] = { color: "#DDEB9D", fontSize };
       } else {
         state.nodeStyles[id].fontSize = fontSize;
       }

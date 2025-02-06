@@ -40,18 +40,6 @@ const GraphVisualization: React.FC = () => {
   const [edges, setEdges, onEdgesChange] = useEdgesState(storeEdges);
 
   const initialPositions = useRef<Record<string, { x: number; y: number }>>({});
-  // useEffect(() => {
-  //   setNodes((prevNodes) =>
-  //     prevNodes.map((node) =>
-  //       nodeStyles[node.id]
-  //         ? {
-  //             ...node,
-  //             data: { ...node.data, style: nodeStyles[node.id] },
-  //           }
-  //         : node
-  //     )
-  //   );
-  // }, [nodeStyles, setNodes]);
 
   useEffect(() => {
     setNodes((prevNodes) =>
