@@ -1,4 +1,5 @@
 # React Flow Graph Visualization
+![Screenshot from 2025-02-06 12-37-06](https://github.com/user-attachments/assets/da38a05d-2fb2-4bcc-bbc7-f34033555a5f)
 
 This project is a graph visualization application built using **React Flow** for interactive, draggable nodes with connected edges. The project leverages **Redux Toolkit** for efficient state management and **TypeScript** for type safety. The app is set up using **Vite** for a fast development experience.
 
